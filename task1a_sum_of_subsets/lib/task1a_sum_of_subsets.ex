@@ -58,8 +58,8 @@ defmodule Task1aSumOfSubsets do
   """
 
   def sum_of_one(array_of_digits, sum_val) do
-       subset = subsets(array_of_digits)
-       Enum.filter(subset, fn indiSet -> sum_val == Enum.sum(indiSet) end)
+    subset = subsets(array_of_digits)
+    Enum.filter(subset, fn indiSet -> sum_val == Enum.sum(indiSet) end)
   end
 
   def subsets([]) do
@@ -117,5 +117,24 @@ defmodule Task1aSumOfSubsets do
       }
   """
   def sum_of_all(array_of_digits, matrix_of_sum) do
+    # required sum
+    reqSums = valid_sum(matrix_of_sum)
+    mainResult = %{}
+
+    mainResult =
+      Enum.map(reqSums, fn x -> Map.put(mainResult, x, sum_of_one(array_of_digits, x)) end)
+
+    merge(mainResult)
+  end
+
+  def merge(list_of_maps) do
+    do_merge(list_of_maps, %{})
+  end
+
+  defp do_merge([], acc), do: acc
+
+  defp do_merge([head | rest], acc) do
+    updated_acc = Map.merge(acc, head)
+    do_merge(rest, updated_acc)
   end
 end
