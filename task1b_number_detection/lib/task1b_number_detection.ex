@@ -32,6 +32,7 @@ defmodule Task1bNumberDetection do
       # Ignore contours that are too small or too large
 
     Enum.map(contours, &elem(&1, 0))
+    TesseractOcr.read(contours)
   end
 
   #   def show(%Evision.Mat{channels: _, dims: _, raw_type: _, ref: image1, shape: _, type: _}) do
