@@ -58,6 +58,7 @@ defmodule Task1aSumOfSubsets do
   """
 
   def sum_of_one(array_of_digits, sum_val) do
+    array_of_digits = Enum.filter(array_of_digits, fn x -> x !== 0 end)
     subset = subsets(array_of_digits)
     Enum.filter(subset, fn indiSet -> sum_val == Enum.sum(indiSet) end)
   end
