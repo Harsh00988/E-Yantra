@@ -53,7 +53,7 @@ defmodule Task1bNumberDetectionTest do
   test "TC$:check final output for the set of given images" do
     expected_final_list = [
       {"grid_1.png", [{"22", 1}, {"16", 6}, {"25", 8}]},
-      {"grid_2.png", [{"13", 3}, {"21", 5}, {"20", 7}]},
+      {"grid_2.png", [{"13", 3}, {"27", 5}, {"20", 7}]},
       {"grid_3.png", [{"17", 3}, {"20", 4}, {"11", 5}, {"15", 9}]},
       {"grid_4.png", []},
       {"grid_5.png", [{"13", 1}, {"19", 2}, {"17", 3}, {"20", 4}, {"16", 5}, {"11", 6}, {"24", 7}, {"15", 8}, {"28", 9}]},

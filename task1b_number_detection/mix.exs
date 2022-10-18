@@ -20,8 +20,9 @@ defmodule Task1bNumberDetection.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:evision, "~> 0.1.0-dev", github: "cocoa-xu/evision", branch: "main"},
       {:nx, "~> 0.2"},
+      {:evision, "~> 0.1.7", github: "cocoa-xu/evision", tag: "v0.1.7"},
+      {:tesseract_ocr, "~> 0.1.5"},
     ]
   end
 end
