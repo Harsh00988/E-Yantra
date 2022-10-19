@@ -35,7 +35,7 @@ defmodule Task1bNumberDetection do
 
     contours = contours |> Enum.map(&{elem(OpenCV.contourArea(&1), 1), &1})
 
-    Enum.map(contours,&elem(&1,0))
+    Enum.map(contours, &elem(&1, 0))
   end
 
   def enum_at([h | t] = x, i) when i > 0 do
