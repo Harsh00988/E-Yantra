@@ -29,13 +29,9 @@ defmodule Task1bNumberDetection do
     thrVal =
       OpenCV.imread(image, flags: OpenCV.cv_IMREAD_GRAYSCALE())
       |> OpenCV.adaptiveThreshold(255, 1, 1, 11, 2)
-
-    {contours, _} =
-      OpenCV.findContours(thrVal, OpenCV.cv_RETR_TREE(), OpenCV.cv_CHAIN_APPROX_NONE())
-
-    contours = contours |> Enum.map(&{elem(OpenCV.contourArea(&1), 1), &1})
-
-    Enum.map(contours, &elem(&1, 0))
+      |> OpenCV.findContours(OpenCV.cv_RETR_TREE(), OpenCV.cv_CHAIN_APPROX_NONE())
+      |> elem(0)
+      |> enum_at(0)
   end
 
   def enum_at([h | t] = x, i) when i > 0 do
