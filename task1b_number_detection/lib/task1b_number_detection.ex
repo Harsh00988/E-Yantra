@@ -3,6 +3,13 @@ defmodule Task1bNumberDetection do
   A module that implements functions for detecting numbers present in a grid in provided image
   """
   alias Evision, as: OpenCV
+  use Bitwise
+
+  def show(%Evision.Mat{channels: _, dims: _, raw_type: _, ref: image1, shape: _, type: _}) do
+    Evision.HighGui.imshow("image", image1)
+    Evision.HighGui.waitKey(7000)
+    Evision.HighGui.destroyWindow("image")
+  end
 
   @doc """
   #Function name:
@@ -19,27 +26,23 @@ defmodule Task1bNumberDetection do
       [["22", "na", "na"], ["na", "na", "16"], ["na", "25", "na"]]
   """
   def identifyCellNumbers(image) do
-    im = OpenCV.imread(image)
-#     im1 = OpenCV.findContours(image, Evision.cv_RETR_LIST(), Evision.cv_CHAIN_APPROX_TC89_L1())
-    gray = OpenCV.imread!(image, flags: OpenCV.cv_IMREAD_GRAYSCALE())
-    {_, bw} = OpenCV.threshold!(gray, 50, 255, OpenCV.cv_THRESH_OTSU())
-    {contours, _} = OpenCV.findContours!(bw, OpenCV.cv_RETR_LIST(), OpenCV.cv_CHAIN_APPROX_NONE())
+    thrVal =
+      OpenCV.imread(image, flags: OpenCV.cv_IMREAD_GRAYSCALE())
+      |> OpenCV.adaptiveThreshold(255, 1, 1, 11, 2)
 
-    contours =
-      contours
-      # Calculate the area of each contour
-      |> Enum.map(&{elem(OpenCV.contourArea(&1), 1), &1})
-      # Ignore contours that are too small or too large
+    {contours, _} =
+      OpenCV.findContours(thrVal, OpenCV.cv_RETR_TREE(), OpenCV.cv_CHAIN_APPROX_NONE())
 
-    Enum.map(contours, &elem(&1, 0))
-    TesseractOcr.read(contours)
+    contours = contours |> Enum.map(&{elem(OpenCV.contourArea(&1), 1), &1})
+
+    Enum.map(contours,&elem(&1,0))
   end
 
-  #   def show(%Evision.Mat{channels: _, dims: _, raw_type: _, ref: image1, shape: _, type: _}) do
-  #     Evision.HighGui.imshow!("image", image1)
-  #     Evision.HighGui.waitkey!(7000)
-  #     Evision.HighGui.destroyWindow!("image")
-  #   end
+  def enum_at([h | t] = x, i) when i > 0 do
+    enum_at(t, i - 1)
+  end
+
+  def enum_at([h | t], i), do: h
 
   @doc """
   #Function name:
