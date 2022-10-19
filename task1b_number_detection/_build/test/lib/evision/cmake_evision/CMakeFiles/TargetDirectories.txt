@@ -1,2 +1,0 @@
-/home/harsh-victus/Documents/Coding/E-Yantra-main/task1b_number_detection/_build/test/lib/evision/cmake_evision/CMakeFiles/edit_cache.dir
-/home/harsh-victus/Documents/Coding/E-Yantra-main/task1b_number_detection/_build/test/lib/evision/cmake_evision/CMakeFiles/rebuild_cache.dir
